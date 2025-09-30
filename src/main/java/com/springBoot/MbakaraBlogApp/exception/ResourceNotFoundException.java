@@ -8,9 +8,9 @@ public class ResourceNotFoundException extends RuntimeException{
 
     private String resourceName;
     private String fieldName;
-    private String fieldValue;
+    private long fieldValue;
 
-    public ResourceNotFoundException(String resourceName, String fieldName, String fieldValue) {
+    public ResourceNotFoundException(String resourceName, String fieldName, long fieldValue) {
         //The next line will pass messages to the super constructor using super keyword
         super(String.format("%s not found with %s : '%s'", resourceName, fieldName, fieldValue)); // Dynamically, this line will be;
         // Post not found id 1 (that's the ID no, this will be the custom message)
@@ -27,7 +27,7 @@ public class ResourceNotFoundException extends RuntimeException{
         return fieldName;
     }
 
-    public String getFieldValue(){
+    public long getFieldValue(){
         return fieldValue;
     }
 }
