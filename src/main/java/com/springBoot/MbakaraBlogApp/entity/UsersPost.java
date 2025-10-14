@@ -2,16 +2,19 @@ package com.springBoot.MbakaraBlogApp.entity;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+import java.util.HashSet;
+import java.util.Set;
+
+//@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(
-        name = "user'spost", uniqueConstraints = {@UniqueConstraint(columnNames ={"title"})}
+        name = "usersPost", uniqueConstraints = {@UniqueConstraint(columnNames ={"title"})}
 )
 
 public class UsersPost {
@@ -30,6 +33,9 @@ public class UsersPost {
 
     @Column(name = "content", nullable = false)
     private String content;
+
+    @OneToMany(mappedBy = "usersPost", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<UsersCommentEntity> comments = new HashSet<>();
 
 
 
