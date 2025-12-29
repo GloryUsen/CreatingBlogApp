@@ -1,19 +1,19 @@
 package com.springBoot.MbakaraBlogApp.dtos;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class ErrorDetails {
-    private Date timeStamp;
+    private LocalDateTime timeStamp;
     private String message;
     private String details;
 
-    public ErrorDetails(Date timeStamp, String message, String details) {
+    public ErrorDetails(LocalDateTime timeStamp, String message, String details) {
         this.timeStamp = timeStamp;
         this.message = message;
         this.details = details;
     }
 
-    public Date getTimeStamp() {
+    public LocalDateTime getTimeStamp() {
         return timeStamp;
     }
 

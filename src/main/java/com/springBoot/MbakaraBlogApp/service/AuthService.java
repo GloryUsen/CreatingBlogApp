@@ -1,4 +1,14 @@
 package com.springBoot.MbakaraBlogApp.service;
 
-public class AuthService {
+import com.springBoot.MbakaraBlogApp.dtos.LoginDTO;
+import com.springBoot.MbakaraBlogApp.dtos.RegisterDTO;
+
+public interface AuthService {
+
+    String login(LoginDTO loginDTO);
+
+    String register(RegisterDTO registerDTO);
+
+
+
 }

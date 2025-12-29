@@ -1,11 +1,10 @@
 package com.springBoot.MbakaraBlogApp.dtos;
 
+import java.util.Set;
+
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Null;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-
-import java.util.Set;
 
 @Data
 public class UserPostDTO {
@@ -27,5 +26,10 @@ public class UserPostDTO {
     @NotEmpty(message = "Content cannot be empty")
     private String content;
     private Set<UsersCommentDTO> comments;
+
+    // Here whenever a user wants to create a post, user has to enter title, description, content and select the category
+    // And each category is associated with categoryId
+
+    private Long categoryId;
 
 }

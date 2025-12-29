@@ -17,6 +17,7 @@ public interface UserPostService {
     UserPostDTO updateUserPost(UserPostDTO post, long id);
 
     void deleteUserPostById(long id);
+    List<UserPostDTO> getUsersPostByCategory(Long categoryId);
 
 
 

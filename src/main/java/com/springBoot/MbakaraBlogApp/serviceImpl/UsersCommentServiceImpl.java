@@ -18,17 +18,15 @@ import java.util.stream.Collectors;
 @Service
 public class UsersCommentServiceImpl implements UsersCommentService {
 
-    private final UsersCommentRepository usersCommentRepository;
-    private UsersCommentRepository commentRepository;
+    private UsersCommentRepository usersCommentRepository;
     private UserPostRepository userPostRepository;
-    private ModelMapper mapper;
+    private ModelMapper modelMapper;
 
-    public UsersCommentServiceImpl(UsersCommentRepository commentRepository, UserPostRepository userPostRepository,
-                                   UsersCommentRepository usersCommentRepository, ModelMapper mapper) {
-        this.commentRepository = commentRepository;
+    public UsersCommentServiceImpl(UserPostRepository userPostRepository,
+                                   UsersCommentRepository usersCommentRepository, ModelMapper modelMapper) {
         this.userPostRepository = userPostRepository;
         this.usersCommentRepository = usersCommentRepository;
-        this.mapper = mapper;
+        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -137,7 +135,7 @@ public class UsersCommentServiceImpl implements UsersCommentService {
       Using ModelMapper API method to convert Entity to DTO below
      */
     private UsersCommentDTO mapCommentToDTO(UsersCommentEntity commentEntity){
-        UsersCommentDTO commentDTO = mapper.map(commentEntity, UsersCommentDTO.class);
+        UsersCommentDTO commentDTO = modelMapper.map(commentEntity, UsersCommentDTO.class);
         return commentDTO;
 
     }
@@ -157,7 +155,7 @@ public class UsersCommentServiceImpl implements UsersCommentService {
      */
 
     private UsersCommentEntity mapCommentToEntity(UsersCommentDTO commentDTO){
-        UsersCommentEntity commentEntity = mapper.map(commentDTO, UsersCommentEntity.class);
+        UsersCommentEntity commentEntity = modelMapper.map(commentDTO, UsersCommentEntity.class);
         return commentEntity;
     }
 }
