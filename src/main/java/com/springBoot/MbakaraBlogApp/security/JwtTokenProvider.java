@@ -25,7 +25,7 @@ public class JwtTokenProvider {
     @Value("${app.jwt-secret}")
     private String jwtSecret;
 
-    @Value("${app-jwt-expiration-milliseconds}")
+    @Value("${app.jwt-expiration-milliseconds}")
     private long jwtExpirationDate;
 
     // Generating JWT Token
@@ -66,15 +66,9 @@ public class JwtTokenProvider {
     }
 
     private Key getKey(){
-        //return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
-       try{
-        byte[] keyBytes = Decoders.BASE64.decode(jwtSecret);
-        return Keys.hmacShaKeyFor(keyBytes);
-       }catch(IllegalArgumentException ex){
-        byte[] keyBytes = jwtSecret.getBytes();
-        return Keys.hmacShaKeyFor(keyBytes);
-       }
-    }
+        //return Keys.hmacShaKeyFor(jwtSecret.getBytes());
+      return Keys.hmacShaKeyFor(jwtSecret.getBytes());
+      }
 
 
     //Getting Username from JWT Token Or Extract username from token

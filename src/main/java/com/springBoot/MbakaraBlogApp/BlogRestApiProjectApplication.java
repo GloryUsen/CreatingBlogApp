@@ -6,6 +6,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import com.springBoot.MbakaraBlogApp.entity.RolePlayed;
 import com.springBoot.MbakaraBlogApp.repository.RolePlayedRepository;
@@ -17,6 +19,8 @@ import io.swagger.v3.oas.annotations.info.License;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 
 @SpringBootApplication
+@EnableJpaRepositories(basePackages = "com.springBoot.MbakaraBlogApp.repository")
+@EntityScan(basePackages = "com.springBoot.MbakaraBlogApp.entity")
 @OpenAPIDefinition(
     info = @Info(
         title = "MBAKARA BLOG APP REST APIs",
@@ -24,13 +28,12 @@ import io.swagger.v3.oas.annotations.ExternalDocumentation;
         version = "v1.0",
         contact = @Contact(
             name = "Mbakara",
-            email = "ganwana89@gmail.com", 
+            email = "ganwana89@gmail.com",
             url = "https//github.com/GloryUsen"
         ),
         license = @License(
             name = "Apache 2.0",
             url = "https://www.github.com/GloryUsen/MbakaraBlogApp/blob/main/LICENSE"
-            
         )
     ),
     externalDocs = @ExternalDocumentation(
@@ -38,8 +41,7 @@ import io.swagger.v3.oas.annotations.ExternalDocumentation;
         url = "https://github.com/GloryUsen/CreatingBlogApp"
     )
 )
-public class BlogRestApiProjectApplication  implements CommandLineRunner {
-    
+public class BlogRestApiProjectApplication implements CommandLineRunner {
 
     @Bean
     public ModelMapper modelMapper() {
@@ -50,20 +52,17 @@ public class BlogRestApiProjectApplication  implements CommandLineRunner {
         SpringApplication.run(BlogRestApiProjectApplication.class, args);
     }
 
-
-    @Autowired 
+    @Autowired
     private RolePlayedRepository rolePlayedRepository;
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         RolePlayed roleAdmin = new RolePlayed();
         roleAdmin.setName("ROLE_ADMIN");
         rolePlayedRepository.save(roleAdmin);
-        
+
         RolePlayed roleUser = new RolePlayed();
         roleUser.setName("ROLE_USER");
         rolePlayedRepository.save(roleUser);
-        
-
     }
 }
