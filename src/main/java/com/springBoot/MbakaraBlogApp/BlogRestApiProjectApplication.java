@@ -16,6 +16,7 @@ import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.License;
+import jakarta.annotation.PostConstruct;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 
 @SpringBootApplication
@@ -65,4 +66,14 @@ public class BlogRestApiProjectApplication implements CommandLineRunner {
         roleUser.setName("ROLE_USER");
         rolePlayedRepository.save(roleUser);
     }
+
+    @PostConstruct
+    public void checkEnv(){
+            System.out.println("PGHOST = " + System.getenv("PGHOST"));
+        System.out.println("PGPORT = " + System.getenv("PGPORT"));
+        System.out.println("PGDATABASE = " + System.getenv("PGDATABASE"));
+        System.out.println("PGUSER = " + System.getenv("PGUSER"));
+        System.out.println("APP_JWT_SECRET = " + System.getenv("APP_JWT_SECRET"));
+    }
+    
 }
