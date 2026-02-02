@@ -86,7 +86,7 @@ public class SecurityConfig2 {
             .authorizeHttpRequests(auth -> auth
                     .requestMatchers(HttpMethod.GET, "/api/**").permitAll() //Anyone can get posts
                     .requestMatchers(HttpMethod.GET, "/api/categories/**").permitAll() // Categories public
-                    .requestMatchers("/api/auth/**").permitAll() // Registration, Login are public.
+                    .requestMatchers("/api/auth/**").permitAll() // Registration and Login are public.
                     .requestMatchers(HttpMethod.POST, "/api/posts/**").authenticated() // Requires login
                     .requestMatchers("/swagger-ui/**").permitAll() // swagger ui public
                     .requestMatchers("/v3/api-docs/**").permitAll() // swagger doc public

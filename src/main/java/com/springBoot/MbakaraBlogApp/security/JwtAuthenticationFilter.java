@@ -33,18 +33,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         // Getting JWT Token from http request
         String token = getTokenFromRequest(request);
 
-        //Validating Token
+        //Validating Token if it exists, so if token is valid and exists, treat the user as logged in, if not requst continues as anonymous.
         if (StringUtils.hasText(token) && jwtTokenProvider.validateToken(token)){
 
 
-            // Get Username from Token
+            // Get Username from Token by loading the user.
             String username = jwtTokenProvider.getUsername(token);
-
-            // Load the USer associated with the token
+           // Load the User from the database
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
 
-            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+            // Tell spring that this user is Authnticated, it belongs to a logged-in user
+                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                     userDetails,
                     null,
                     userDetails.getAuthorities()
@@ -55,7 +55,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         }
 
-        filterChain.doFilter(request, response);
+        filterChain.doFilter(request, response); // Contiune the request, i am done checking, Let the next filter decide what will happen.
 
     }
 
@@ -67,4 +67,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
        // return bearerToken;
        return null;
     }
+
+
+    // What this class does and does not do;
+    /*. 1. Checks if token exists
+        2. Checks if token is valid
+        3. Loads the user
+        4. Marks the request as authenticated
+
+        What it does not do;
+        1. it does say Allow this endpoint”
+        2. it does not say “Block this endpoint”
+        3. it does not say This user has permission”
+    Rather the decision happens later in securityCong2.
+     * */ 
 }
